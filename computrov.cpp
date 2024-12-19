@@ -3,15 +3,18 @@
 #include <vector>
 #include <exception>
 
-struct Term {
-	int     exponent;
-	double  coefficient;
+typedef struct s_Term {
+	int		exponent;
+	double	coefficient;
+	s_Term(double coeff, int exp) : coefficient(coeff), exponent(exp){}
+} t_term;
 
-	Term(double coeff, int exp) : coefficient(coeff), exponent(exp) {}
-};
+std::vector<t_term> tokenizer(std::string size)
+{
 
+}
 
-void splitEquation(std::string equation)
+void splitEquation(std::string equation, std::string *left, std::string *right)
 {
 	if (equation.find('=') != std::string::npos)
 	{
@@ -32,8 +35,8 @@ int computorv(std::string equation)
 	{
 		splitEquation(equation, &left, &right);
 		//vettore di termini
-		std::vector<Term> leftSize = tokenizer(left);
-		std::vector<Term> rightSize = tokenizer(right);
+		std::vector<t_term> leftSize = tokenizer(left);
+		std::vector<t_term> rightSize = tokenizer(right);
 	}
 	catch (std::exception &e)
 	{
@@ -52,10 +55,7 @@ int main(int ac, char **av)
 		std::cerr << "Usage: " << av[0] << " \"equation\"" << std::endl;
 		return 1;
 	}
-
 	equation = av[1];
 	computorv(equation);
 
-
-	return 0;
 }
